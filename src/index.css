@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components{
+    .inpt {
+            @apply border border-gray-200 focus:outline-none p-3 w-full;
+        }
+    .cbtn{
+        @apply p-4 bg-[#3c4043];
+    }
+}
+

@@ -22,7 +22,7 @@ const Mychats = ({ fetchAgain }) => {
       };
 
       const { data } = await axios.get(
-        "https://realtime-chat-server-ecru.vercel.app/api/chat",
+        `${import.meta.env.VITE_BASE_URL}/api/chat`,
         config
       );
       setChats(data);
@@ -79,7 +79,7 @@ const Mychats = ({ fetchAgain }) => {
                 className="text-zinc-100"
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bg={selectedChat === chat ? "#38B2AC" : "gray.500"}
+                bg={selectedChat === chat ? "#38B2AC" : "gray.300"}
                 color={selectedChat === chat ? "white" : "black"}
                 px={3}
                 py={2}

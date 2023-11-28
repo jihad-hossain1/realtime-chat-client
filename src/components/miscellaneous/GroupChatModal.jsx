@@ -59,7 +59,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.get(
-        `https://realtime-chat-server-ecru.vercel.app/api/user?search=${search}`,
+        `${import.meta.env.VITE_BASE_URL}/api/user?search=${search}`,
         config
       );
       console.log(data);
@@ -100,7 +100,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.post(
-        `https://realtime-chat-server-ecru.vercel.app/api/chat/group`,
+        `${import.meta.env.VITE_BASE_URL}/api/chat/group`,
         {
           name: groupChatName,
           users: JSON.stringify(selectedUsers.map((u) => u._id)),

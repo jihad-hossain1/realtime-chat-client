@@ -41,7 +41,7 @@ const SignIn = () => {
       };
 
       const { data } = await axios.post(
-        "https://realtime-chat-server-ecru.vercel.app/api/user/login",
+        `${import.meta.env.VITE_BASE_URL}/api/user/login`,
         { email, password },
         config
       );

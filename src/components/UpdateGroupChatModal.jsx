@@ -47,7 +47,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        `https://realtime-chat-server-ecru.vercel.app/api/user?search=${search}`,
+        `${import.meta.env.VITE_BASE_URL}/api/user?search=${search}`,
         config
       );
       // console.log(data);
@@ -77,7 +77,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `https://realtime-chat-server-ecru.vercel.app/api/chat/rename`,
+        `${import.meta.env.VITE_BASE_URL}/api/chat/rename`,
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -135,7 +135,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `https://realtime-chat-server-ecru.vercel.app/api/chat/groupadd`,
+        `${import.meta.env.VITE_BASE_URL}/api/chat/groupadd`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
@@ -180,7 +180,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `https://realtime-chat-server-ecru.vercel.app/api/chat/groupremove`,
+        `${import.meta.env.VITE_BASE_URL}/api/chat/groupremove`,
         {
           chatId: selectedChat._id,
           userId: user1._id,

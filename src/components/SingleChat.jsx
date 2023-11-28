@@ -10,9 +10,10 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 
-import UpdateGroupChatModal from "./miscellaneous/GroupChatModal";
+// import UpdateGroupChatModal from "./miscellaneous/GroupChatModal";
 import { ChatState } from "../context/ChatProvider";
 import io from "socket.io-client";
+import UpdateGroupChatModal from "./UpdateGroupChatModal";
 
 const ENDPOINT = `${import.meta.env.VITE_BASE_URL}`;
 var socket, selectedChatCompare;
@@ -97,7 +98,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
-    socket.on("connection", () => setSocketConnected(true));
+    socket.on("connected", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
 
@@ -113,7 +114,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket.on("message recived", (newMessageRecieved) => {
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
         if (!notification.includes(newMessageRecieved)) {
@@ -210,13 +211,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               isRequired
               mt={3}
             >
-              {istyping ? (
-                <div>
-                  <h4>typing.....</h4>
-                </div>
-              ) : (
-                <></>
-              )}
+              {istyping ? <h4>typing.....</h4> : <></>}
               <Input
                 variant="filled"
                 bg="#E0E0E0"

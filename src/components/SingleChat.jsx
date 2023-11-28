@@ -10,9 +10,10 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 
-import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/GroupChatModal";
 import { ChatState } from "../context/ChatProvider";
+import io from "socket.io-client";
+
 const ENDPOINT = `${import.meta.env.VITE_BASE_URL}`;
 var socket, selectedChatCompare;
 
@@ -96,7 +97,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.emit("setup", user);
-    socket.on("connected", () => setSocketConnected(true));
+    socket.on("connection", () => setSocketConnected(true));
     socket.on("typing", () => setIsTyping(true));
     socket.on("stop typing", () => setIsTyping(false));
 
@@ -107,11 +108,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     fetchMessages();
 
     selectedChatCompare = selectedChat;
-    // eslint-disable-next-line
   }, [selectedChat]);
 
   useEffect(() => {
-    socket.on("message recieved", (newMessageRecieved) => {
+    socket.on("message recived", (newMessageRecieved) => {
       if (
         !selectedChatCompare || // if chat is not selected or doesn't match current chat
         selectedChatCompare._id !== newMessageRecieved.chat._id
